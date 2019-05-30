@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="__JS__/jquery.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/register.css">
+    <title>{$title}</title>
+</head>
+<body>
+    <div class="register">
+        <form action="" id="add_form">
+            姓名：<input type="text" name="username" value=""><br><br>
+            性别：<input type="radio" name="sex" value="1" checked>男&nbsp;&nbsp;<input type="radio" name="sex" value="2">女<br><br>
+            密码：<input type="password" name="password" value=""><br><br>
+            <input type="button" name="sub" class="sub" value="提交">
+
+        </form>
+    </div>
+
+</body>
+<script>
+    $('.sub').click(function(){
+        $.ajax({
+            url: 'addUser',
+            type: 'post',
+            dataType: 'json',
+            data: $('#add_form').serialize(),
+            success: function(data) {
+                if (data.code == 1) {
+                    location.href='/home/test/index';
+                } else {
+                    alert(data.msg);
+                }
+
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+    });
+</script>
+</html>
